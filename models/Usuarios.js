@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 //Definimos un esquema 
 const usuarioSchema = mongoose.Schema({
     nombre: String,
-    email: String,
+    email: { type: String, index: true},
     clave: String
 });
 

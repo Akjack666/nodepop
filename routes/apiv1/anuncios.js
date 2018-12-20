@@ -6,12 +6,14 @@ const router = express.Router();
 
 
 const Anuncio = require('../../models/Anuncio');
+const jwtAuthMiddleware = require('../../lib/jwtAuthMiddleware');
 
 /**
  * 
  * GET /anuncios
  * obtener una lista de anuncios
  */
+router.use( jwtAuthMiddleware());
 
 router.get('/', (req,res,next) => {
 

@@ -31,6 +31,14 @@ app.use('/users', usersRouter);
  */
 
 app.use('/apiv1/anuncios', require('./routes/apiv1/anuncios'));
+app.use('/apiv1/usuarios', require('./routes/apiv1/usuarios'))
+
+/**
+*Rutas de mi aplicacion web
+*/
+
+app.use('/', require('./routes/index'));
+app.use('/users', require('./routes/users'));
 
 
 
