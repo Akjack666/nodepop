@@ -13,7 +13,7 @@ const jwtAuthMiddleware = require('../../lib/jwtAuthMiddleware');
  * GET /anuncios
  * obtener una lista de anuncios
  */
-router.use( jwtAuthMiddleware());
+router.use( jwtAuthMiddleware()); // Express comprueba que token sea valido antes deejecutar lo siguiente
 
 router.get('/', (req,res,next) => {
 
