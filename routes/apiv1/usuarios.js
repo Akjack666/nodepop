@@ -6,7 +6,10 @@ const router = express.Router();
 const Usuarios = require('../../models/Usuarios');
 const jwt = require('jsonwebtoken');
 
-var bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const myPlaintextPassword = 's0/\/\P4$$w0rD';
+const someOtherPlaintextPassword = 'not_bacon';
 
 /**
  * POST /usuarios/login
@@ -65,25 +68,40 @@ var bcrypt = require('bcrypt');
 
   // http://localhost:3000/apiv1/usuarios/
 
-  var BCRYPT_SALT_ROUNDS = 12;
+
 
  router.post('/', async (req, res, next) => {
     try{
       // recuperamos los datos del nuevo usuario
 
     const usuarioData = req.body;
-
     
 
-    // creamos un usuario en memoria (objeto de tipo Usuario)
+   
 
-    const usuario = new Usuarios(usuarioData);
+    await bcrypt.hash(req.body.clave, saltRounds, function(err, hash) {
+        // Store hash in your password DB.
+        console.log(hash);
 
-    //lo guardamos en bd
 
-    await usuario.save();
+        // creamos un usuario en memoria (objeto de tipo Usuario)
 
-    res.json({ success : true, result: usuario}); // se puede personalizar
+        const usuario = new Usuarios(usuarioData);
+       
+        usuario.clave = hash;
+
+         //lo guardamos en bd
+
+        usuario.save();
+
+        res.json({ success : true, result: usuario}); // se puede personalizar
+         
+
+      });
+
+      
+
+   
 
   }catch(err){
       next(err);
