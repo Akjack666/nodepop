@@ -58,11 +58,12 @@ router.get('/', (req, res, next) => {
         } else if (precio === "10-") {
 
             filter.precio = {
-                '$gte':'10'}
+                '$gte': '10'
+            }
 
-        }else if('-50') {
+        } else if ('-50') {
 
-            filter.precio = { '$lte':'50' }
+            filter.precio = { '$lte': '50' }
         }
 
     }

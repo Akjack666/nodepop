@@ -16,109 +16,110 @@ const saltRounds = 10;
  */
 
 
- // http://localhost:3000/apiv1/usuarios/login
+// http://localhost:3000/apiv1/usuarios/login
 
- router.post('/login', async (req, res, next) => {
+router.post('/login', async (req, res, next) => {
 
-    try{
+    try {
 
-    const email = req.body.email;
-    const password = req.body.clave;
+        const email = req.body.email;
+        const password = req.body.clave;
 
-    
-    
 
-    //buscamos el usuario
 
-   const usuario = await Usuarios.findOne({ email: email}).exec()
-   console.log(usuario)
 
-   if(!usuario.email){
-       res.json({succes: false, error: res.__('invalid')});
-       return;
-   }
+        //buscamos el usuario
 
-   bcrypt.compare(usuario.clave, password, function(err, res) {
-    // res == true
+        const usuario = await Usuarios.findOne({ email: email }).exec()
+        console.log(usuario)
 
-    if(res){
-        if(password !== usuario.clave){
-            res.json({succes: false, error: res.__('invalid')});
+        if (!usuario.email) {
+            res.json({ succes: false, error: res.__('invalid') });
             return;
-           }
+        }
+
+        bcrypt.compare(usuario.clave, password, function (err, res) {
+            // res == true
+
+            if (res) {
+                if (password !== usuario.clave) {
+                    res.json({ succes: false, error: res.__('invalid') });
+                    return;
+                }
+            }
+
+        });
+
+
+
+        //crear un token
+
+        jwt.sign({ user_id: usuario._id }, process.env.JWT_SECRET, {
+            expiresIn: '2d'
+        }, (err, token) => {
+            if (err) {
+                next(err);
+                return;
+            }
+            res.json({ succes: true, result: token })
+        })
+
+    } catch (err) {
+        next(err);
+        return;
     }
-    
-});
-
-   
-
-   //crear un token
-
-   jwt.sign({user_id: usuario._id}, process.env.JWT_SECRET, {
-       expiresIn: '2d'
-   }, (err, token) => {
-       if(err){
-           next(err);
-           return;
-       }
-       res.json({succes: true, result: token})
-   })
-
-}catch(err){
-    next(err);
-    return;
-}
- })
+})
 
 
- /**
-  * POST /usuarios
-  * crea un usuario en la base de datos
-  * 
-  */
+/**
+ * POST /usuarios
+ * crea un usuario en la base de datos
+ * 
+ */
 
 
-  // http://localhost:3000/apiv1/usuarios/
+// http://localhost:3000/apiv1/usuarios/
 
 
 
- router.post('/', async (req, res, next) => {
-    try{
-      // recuperamos los datos del nuevo usuario
+router.post('/', async (req, res, next) => {
+    try {
+        // recuperamos los datos del nuevo usuario
 
-    const usuarioData = req.body;
-    
+        const usuarioData = req.body;
 
-   
-
-    await bcrypt.hash(req.body.clave, saltRounds, function(err, hash) {
-        // Store hash in your password DB.
-        console.log(hash);
+        console.log(usuarioData);
 
 
-        // creamos un usuario en memoria (objeto de tipo Usuario)
 
-        const usuario = new Usuarios(usuarioData);
-       
-        usuario.clave = hash;
+        await bcrypt.hash(req.body.clave, saltRounds, function (err, hash) {
+            // Store hash in your password DB.
+            console.log(hash);
 
-         //lo guardamos en bd
 
-        usuario.save();
+            // creamos un usuario en memoria (objeto de tipo Usuario)
 
-        res.json({ success : true, result: usuario}); // se puede personalizar
-         
+            const usuario = new Usuarios(usuarioData);
 
-      });
+            usuario.clave = hash;
 
-      
+            //lo guardamos en bd
 
-   
+            usuario.save();
 
-  }catch(err){
-      next(err);
-      return;
-  }
+            res.json({ success: true, result: usuario }); // se puede personalizar
+
+
+        });
+
+
+
+
+
+    } catch (err) {
+        next(err);
+        return;
+    }
 
 })
 
