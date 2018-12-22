@@ -37,7 +37,15 @@ mongoose.connection.once('open', () => {
           "precio": 230.15,
           "foto": "images/anuncios/bici.jpg",
           "tags": [ "lifestyle", "motor"]
-    }, {
+    }, 
+    {
+        "nombre": "Gafas de sol",
+        "venta": true,
+        "precio": 30,
+        "foto": "images/anuncios/gafas.jpg",
+        "tags": [ "lifestyle"]
+  },
+    {
           "nombre": "iPhone 3GS",
           "venta": false,
           "precio": 50.00,

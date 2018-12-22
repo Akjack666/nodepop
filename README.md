@@ -3,6 +3,13 @@
 
 Configurar variables de entorno. Hacer una copia del fichero .env.example a .env y modificar los valores de configuración.
 
+
+Creacion de anuncios y usuario DEMO:
+
+```shell
+npm run install_db.js
+```
+
 Arrancar la aplicación en modo desarrollo:
 
 ```shell
