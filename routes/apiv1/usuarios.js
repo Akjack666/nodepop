@@ -24,7 +24,10 @@ const someOtherPlaintextPassword = 'not_bacon';
     try{
 
     const email = req.body.email;
-    const password = req.body.password;
+    const password = req.body.clave;
+
+    
+    
 
     //buscamos el usuario
 
@@ -35,10 +38,19 @@ const someOtherPlaintextPassword = 'not_bacon';
        return;
    }
 
-   if(password !== usuario.password){
-    res.json({succes: false, error: 'Invalid credentials'});
-    return;
-   }
+   bcrypt.compare(usuario.clave, password, function(err, res) {
+    // res == true
+
+    if(res){
+        if(password !== usuario.clave){
+            res.json({succes: false, error: 'Invalid credentials'});
+            return;
+           }
+    }
+    
+});
+
+   
 
    //crear un token
 
