@@ -20,3 +20,8 @@ Recordatorio: Para arrancar el servidor de MongoDB:
 ```shell
 bin/mongod --dbpath ./data/db --directoryperdb
 ```
+
+Internacionalizacion
+
+
+En el directorio /locales, se pueden añadir las variables para ingles o castellano, o definir en .app, i18n.configure, nuevos idiomas

@@ -31,9 +31,10 @@ const saltRounds = 10;
     //buscamos el usuario
 
    const usuario = await Usuarios.findOne({ email: email}).exec()
+   console.log(usuario)
 
-   if(!usuario){
-       res.json({succes: false, error: 'Invalid credentials'});
+   if(!usuario.email){
+       res.json({succes: false, error: res.__('invalid')});
        return;
    }
 
@@ -42,7 +43,7 @@ const saltRounds = 10;
 
     if(res){
         if(password !== usuario.clave){
-            res.json({succes: false, error: 'Invalid credentials'});
+            res.json({succes: false, error: res.__('invalid')});
             return;
            }
     }

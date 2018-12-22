@@ -3,11 +3,21 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var i18n = require('i18n');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+app.use(i18n.init);
+
+
+//i18n
+
+i18n.configure({
+  locales:['en', 'es'],
+  directory: __dirname + '/locales'
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
