@@ -8,8 +8,7 @@ const jwt = require('jsonwebtoken');
 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-const myPlaintextPassword = 's0/\/\P4$$w0rD';
-const someOtherPlaintextPassword = 'not_bacon';
+
 
 /**
  * POST /usuarios/login
@@ -54,7 +53,7 @@ const someOtherPlaintextPassword = 'not_bacon';
 
    //crear un token
 
-   jwt.sign({user_id: usuario._id}, '1234', {
+   jwt.sign({user_id: usuario._id}, process.env.JWT_SECRET, {
        expiresIn: '2d'
    }, (err, token) => {
        if(err){
