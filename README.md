@@ -57,7 +57,8 @@ http://localhost:3000/apiv1/anuncios?&jwttoken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV
 ### Por inicio de nombre:
 Ejemplo:
 
-```http://localhost:3000/apiv1/anuncios?nombre=bici&jwttoken=token
+``` 
+http://localhost:3000/apiv1/anuncios?nombre=bici&jwttoken=token
 ```
 
 ### Por Tags:
@@ -106,7 +107,7 @@ http://localhost:3000/apiv1/anuncios?precio=50&jwttoken=token
 ```
 
 
-### Paginacion
+### Paginación
 
 Podremos indicar cuantos productos se mostraran y de cuanto sera el salto, en caso de mostrarlos en varias paginas
 
@@ -125,7 +126,7 @@ http://localhost:3000/apiv1/anuncios?sort=precio&jwttoken=token
 ```
 
 
-### Internacionalizacion
+### Internacionalización
 
 
 En el directorio /locales, se pueden añadir las variables para ingles o castellano, o definir en .app, i18n.configure, nuevos idiomas
