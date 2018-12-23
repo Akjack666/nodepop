@@ -89,6 +89,10 @@ router.post('/', async (req, res, next) => {
         const usuarioData = req.body;
 
         console.log(usuarioData);
+        // Comprobanos si el usuario existe ya
+
+        const usuarioBd = await Usuarios.findOne({ email: usuarioData.email }).exec()
+        
 
 
 
@@ -103,11 +107,24 @@ router.post('/', async (req, res, next) => {
 
             usuario.clave = hash;
 
-            //lo guardamos en bd
+            
 
+            if(usuarioBd === null){
+
+                 //lo guardamos en bd
             usuario.save();
 
             res.json({ success: true, result: usuario }); // se puede personalizar
+
+            }else {
+
+                console.log('El usuario con email ', usuario.email, ' ya existe')
+                next("El usuario ya existe");
+                return;
+            }
+
+
+           
 
 
         });
