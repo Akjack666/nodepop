@@ -130,3 +130,8 @@ http://localhost:3000/apiv1/anuncios?sort=precio&jwttoken=token
 
 
 En el directorio /locales, se pueden añadir las variables para ingles o castellano, o definir en .app, i18n.configure, nuevos idiomas
+
+### URLs
+
+Pagina web: https://www.danirica.es/
+Nodepop: https://nodepop.danirica.es/
