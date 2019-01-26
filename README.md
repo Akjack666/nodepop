@@ -135,3 +135,7 @@ En el directorio /locales, se pueden añadir las variables para ingles o castell
 
 Pagina web: https://www.danirica.es/
 Nodepop: https://nodepop.danirica.es/
+
+### Imagen de prueba
+
+https://nodepop.danirica.es/images/anuncios/bici.png
